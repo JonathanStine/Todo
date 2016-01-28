@@ -6,6 +6,7 @@
 package todo;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import static java.awt.Color.*;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -29,6 +30,7 @@ import static javax.swing.JFrame.EXIT_ON_CLOSE;
 import static javax.swing.JOptionPane.YES_OPTION;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.plaf.metal.MetalBorders;
 
 /**
  *
@@ -71,23 +73,24 @@ public class MainFrame extends JFrame {
             Todo tempTodo = data.getObject(i);
             listboxModel.addElement((i+1) + ". " +tempTodo.GetTitle());
         }
-        Insets margin = new Insets(1, 1, 1, 1);
         Box boxDescription = Box.createHorizontalBox();
         JTextArea Description = new JTextArea();
         Description.setEditable(false);
         Description.setBackground(white);
+        Insets margin = new Insets(1, 1, 1, 1);
         Description.setMargin(margin);
         Description.setPreferredSize(new Dimension(500, 799));
         Description.setLineWrap(true);
         Description.setWrapStyleWord(true);
         Font forTextField = new Font("Arial",Font.BOLD,32);
         Description.setFont(forTextField);
+        Description.setBorder(BorderFactory.createLineBorder(Color.black));
         boxDescription.add(Description);
         //Create listbox for leftPanel
         JList listbox = new JList(listboxModel);
         listbox.setFont(new Font("Arial",Font.BOLD,32));
         listbox.setSize(new Dimension(400,693));
-        listbox.setVisibleRowCount(12);
+        //listbox.setVisibleRowCount(12);
         
        // Todo firstSelect = data.getObject(listbox.getSelectedIndex());
         
@@ -113,9 +116,13 @@ public class MainFrame extends JFrame {
             }
         });
         listbox.setSelectedIndex(0);
+        JScrollPane listboxScroll = new JScrollPane(listbox);
+        listboxScroll.setPreferredSize(new Dimension(400, 671));
+        listboxScroll.setBorder(BorderFactory.createLineBorder(Color.black));
         //leftPanel.setPreferredSize(new Dimension(400,799));
         leftPanelItems.add(dateLabel);
-        leftPanelItems.add(listbox);
+        leftPanelItems.add(Box.createRigidArea(new Dimension(0,4)));
+        leftPanelItems.add(listboxScroll);
         leftPanel.add(leftPanelItems);
         
         //Right Panel
@@ -165,7 +172,7 @@ public class MainFrame extends JFrame {
         //Add components to rightPanel
         rightPanel.add(label);
         rightPanel.add(Box.createRigidArea(new Dimension(0,9)));
-        boxDescription.add(createRigidArea(new Dimension(30,0)));
+        boxDescription.add(createRigidArea(new Dimension(15,0)));
         rightPanel.add(boxDescription);
         rightPanel.add(buttonGroup);
         //Add Panels to MainFrame
