@@ -238,7 +238,7 @@ public class MainFrame extends JFrame {
             resortListBoxModel();
             
         }
-        
+        data.writeToData();
        
     }
     private void displayEdit(JList jlist) {
@@ -298,7 +298,7 @@ public class MainFrame extends JFrame {
             resortListBoxModel();
             
         }
-        
+        data.writeToData();
     }
     
     private void displayDelete(int index) {
@@ -313,7 +313,7 @@ public class MainFrame extends JFrame {
             resortListBoxModel();
             //System.out.println();
         }
-           
+        data.writeToData();   
     }
     
     
